@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      font-size: 16pt;
+      overflow: hidden;
+      background: #222;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50vw;
+      height: 50vh;
+    }
+
+    .circle {
+      border-radius: 50%;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #eee;
+      border: 2px solid #fff;
+    }
+
+    .circle div {
+      text-align: right;
+      position: absolute;
+      height: 20px;
+    }
+
+    .hour-tens {
+      transform: rotate(0deg)
+    }
+    .hour-digits {
+      transform: rotate(0deg)
+    }
+    .minute-tens {
+      transform: rotate(0deg)
+    }
+    .minute-digits {
+      transform: rotate(0deg)
+    }
+    .second-tens {
+      transform: rotate(0deg)
+    }
+    .seconds-digits {
+      transition: .1s;
+      transform: rotate(0deg)
+    }
+
+    .hour-tens div {
+      width: 110px;
+    }
+    .hour-digits div {
+      width: 130px;
+    }
+    .minute-tens div {
+      width: 160px;
+    }
+    .minute-digits div {
+      width: 180px;
+    }
+    .second-tens div {
+      width: 210px;
+    }
+    .second-digits div {
+      width: 230px;
+    }
+
+    .hour-tens div:nth-of-type(1){
+      transform: rotate(0deg);
+    }
+    .hour-tens div:nth-of-type(2){
+      transform: rotate(120deg);
+    }
+    .hour-tens div:nth-of-type(3){
+      transform: rotate(240deg);
+    }
+
+
+
+    .minute-tens div:nth-of-type(1),
+    .second-tens div:nth-of-type(1)
+    {
+      transform: rotate(0deg);
+    }
+    .minute-tens div:nth-of-type(2),
+    .second-tens div:nth-of-type(2)
+    {
+      transform: rotate(60deg);
+    }
+    .minute-tens div:nth-of-type(3),
+    .second-tens div:nth-of-type(3)
+    {
+      transform: rotate(120deg);
+    }
+    .minute-tens div:nth-of-type(4),
+    .second-tens div:nth-of-type(4)
+    {
+      transform: rotate(180deg);
+    }
+    .minute-tens div:nth-of-type(5),
+    .second-tens div:nth-of-type(5)
+    {
+      transform: rotate(240deg);
+    }
+    .minute-tens div:nth-of-type(6),
+    .second-tens div:nth-of-type(6)
+    {
+      transform: rotate(300deg);
+    }
+
+
+
+
+    .hour-digits div:nth-of-type(1),
+    .minute-digits div:nth-of-type(1),
+    .second-digits div:nth-of-type(1)
+    {
+      transform: rotate(0deg);
+    }
+    .hour-digits div:nth-of-type(2),
+    .minute-digits div:nth-of-type(2),
+    .second-digits div:nth-of-type(2)
+    {
+      transform: rotate(-36deg);
+    }
+    .hour-digits div:nth-of-type(3),
+    .minute-digits div:nth-of-type(3),
+    .second-digits div:nth-of-type(3)
+    {
+      transform: rotate(-72deg);
+    }
+    .hour-digits div:nth-of-type(4),
+    .minute-digits div:nth-of-type(4),
+    .second-digits div:nth-of-type(4)
+    {
+      transform: rotate(-108deg);
+    }
+    .hour-digits div:nth-of-type(5),
+    .minute-digits div:nth-of-type(5),
+    .second-digits div:nth-of-type(5)
+    {
+      transform: rotate(-144deg);
+    }
+    .hour-digits div:nth-of-type(6),
+    .minute-digits div:nth-of-type(6),
+    .second-digits div:nth-of-type(6)
+    {
+      transform: rotate(-180deg);
+    }
+    .hour-digits div:nth-of-type(7),
+    .minute-digits div:nth-of-type(7),
+    .second-digits div:nth-of-type(7)
+    {
+      transform: rotate(-216deg);
+    }
+    .hour-digits div:nth-of-type(8),
+    .minute-digits div:nth-of-type(8),
+    .second-digits div:nth-of-type(8)
+    {
+      transform: rotate(-252deg);
+    }
+    .hour-digits div:nth-of-type(9),
+    .minute-digits div:nth-of-type(9),
+    .second-digits div:nth-of-type(9)
+    {
+      transform: rotate(-288deg);
+    }
+    .hour-digits div:nth-of-type(10),
+    .minute-digits div:nth-of-type(10),
+    .second-digits div:nth-of-type(10)
+    {
+      transform: rotate(-324deg);
+    }
+
+
+
+    .selection {
+      border: 1px solid rgba(0, 120, 220, 0.6);
+      width: 100px;
+      height: 40px;
+      transform: translateX(80px) translateY(3px);
+      border-radius: 6px;
+      box-shadow: 
+      -100px 0px 100px 100px rgba(0, 100, 200, 1), 
+      10px 10px 6px rgb(0, 58, 116), 
+      inset 0px 2px 20px #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .test {
+      background-color: aquamarine;
+      position: fixed;
+      bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+  <div class="second-digits circle">
+    <div>0</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+  <div class="second-tens circle">
+    <div>0</div>
+    <div>5</div>
+    <div>4</div>
+    <div>3</div>
+    <div>2</div>
+    <div>1</div>
+  </div>
+  <div class="minute-digits circle">
+    <div>0</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+  <div class="minute-tens circle">
+    <div>0</div>
+    <div>5</div>
+    <div>4</div>
+    <div>3</div>
+    <div>2</div>
+    <div>1</div>
+  </div>
+  <div class="hour-digits circle">
+    <div>0</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+  <div class="hour-tens circle">
+    <div>0</div>
+    <div>2</div>
+    <div>1</div>
+  </div>
+  <div class="selection">
+    <div></div>
+  </div>
+</div>
+<div class="test">0</div>
+<div class="test" style="left: 0px;">0</div>
+<div class="test" style="right: 0px;">待開發????</div>
+
+
+  <script>
+    const hour_tens = document.getElementsByClassName("hour-tens");
+    const hour_digits = document.getElementsByClassName("hour-digits");
+    const minute_tens = document.getElementsByClassName("minute-tens");
+    const minute_digits = document.getElementsByClassName("minute-digits");
+    const second_tens = document.getElementsByClassName("second-tens");
+    const second_digits = document.getElementsByClassName("second-digits");
+    const test = document.getElementsByClassName("test");
+
+    // test[2].innerHTML = '待開發';
+
+    const setDate1 = () => {
+      let date = new Date();
+      let hour = date.getHours();
+      let minute = date.getMinutes();
+      let second = date.getSeconds();
+
+      let hourT = parseInt((hour % 100) / 10);
+      let hourD = parseInt(hour % 10);
+      let minT = parseInt((minute % 100) / 10);
+      let minD = parseInt(minute % 10);
+      let secT = parseInt((second % 100) / 10);
+      let secD = parseInt(second % 10);
+
+      hour_tens[0].style.transform = `rotate( ${hourT * 120}deg )`;
+      hour_digits[0].style.transform = `rotate( ${hourD * 36}deg )`;
+      minute_tens[0].style.transform = `rotate( ${minT * 60}deg )`;
+      minute_digits[0].style.transform = `rotate( ${minD * 36}deg )`;
+      second_tens[0].style.transform = `rotate( ${secT * 60}deg )`;
+      second_digits[0].style.transform = `rotate( ${secD * 36}deg )`;
+
+    }
+
+    setDate1();
+    let num;
+    let count;
+    const doit = (num) => {
+            num = num + .1
+            count ++;
+            // second_tens[0].style.transform = `rotate( ${num * 60}deg )`;
+      test[1].innerHTML = num;
+          }
+    
+    function ani(num) {
+      let count = 0;
+      var tt = setInterval( doit(num), 10);
+      
+          if(count > 10 ){
+            // clearInterval(tt);
+          }
+        }
+    
+
+        const setDate = () => {
+            let date = new Date();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let second = date.getSeconds();
+            let millisecond = date.getMilliseconds();
+
+            let hourT = parseInt((hour % 100) / 10);
+            let hourD = parseInt(hour % 10);
+            let minT = parseInt((minute % 100) / 10);
+            let minD = parseInt(minute % 10);
+            let secT = parseInt((second % 100) / 10);
+            let secD = parseInt(second % 10);
+            let secD_10 = secD/10;
+            let newtt = secT+secD_10;
+            // let ms = parseInt((millisecond % 1000) /100);
+            let ms = parseInt((millisecond % 1000)/100)/10;
+            let newt = ms+secD;
+            
+          hour_tens[0].style.transform = `rotate( ${hourT * 120}deg )`;
+          hour_digits[0].style.transform = `rotate( ${hourD * 36}deg )`;
+          minute_tens[0].style.transform = `rotate( ${minT * 60}deg )`;
+          minute_digits[0].style.transform = `rotate( ${minD * 36}deg )`;
+          second_tens[0].style.transform = `rotate( ${secT * 60}deg )`;
+          second_tens[0].style.transform = `rotate( ${newtt * 60}deg )`;
+
+          if(secD > 8){
+            // ani(secT);
+          }
+          second_digits[0].style.transform = `rotate( ${newt * 36}deg )`;
+
+
+            test[0].innerHTML = `分鐘個位${secD} <br> 分鐘小數一位${newt} <br> 分鐘十位 ${secT} 分鐘小數一位${newtt}`;
+
+        }
+
+        setInterval(setDate, 100);
+
+
+  
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
